@@ -1,0 +1,4 @@
+setuptools~=65.5.1
+pymongo~=4.3.3
+pyramid~=2.0
+waitress~=2.1.2

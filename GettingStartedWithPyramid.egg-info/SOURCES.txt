@@ -1,0 +1,7 @@
+setup.py
+GettingStartedWithPyramid.egg-info/PKG-INFO
+GettingStartedWithPyramid.egg-info/SOURCES.txt
+GettingStartedWithPyramid.egg-info/dependency_links.txt
+GettingStartedWithPyramid.egg-info/entry_points.txt
+GettingStartedWithPyramid.egg-info/requires.txt
+GettingStartedWithPyramid.egg-info/top_level.txt
