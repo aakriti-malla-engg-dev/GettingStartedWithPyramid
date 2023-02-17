@@ -56,27 +56,27 @@ def delete_users_from_db(mobile_no):
 
 try:
     # to add users
-    users = [
-        {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
-        {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
-        {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
-    ]
+    # users = [
+    #     {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
+    #     {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
+    #     {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
+    # ]
 
-    user_added = add_user_to_db(users)
-    print(user_added)
+    # user_added = add_user_to_db(users)
+    # print(user_added)
 
     # to get user
-    print(get_user_from_db('1234567890'))
+    # print(get_user_from_db('1234567890'))
 
     # To get users
     print(get_users_from_db())
 
     # To update the users
-    print(update_user_in_db("1234123467", {'city': 'Bangalore'}))
+    # print(update_user_in_db("1234123467", {'city': 'Bangalore'}))
 
     # To delete the user
-    delete_user = delete_users_from_db('9898989898')
-    print(delete_user)
+    # delete_user = delete_users_from_db('9898989898')
+    # print(delete_user)
 
 except pymongo.errors.ConnectionFailure:
     print("Connection Error!")
