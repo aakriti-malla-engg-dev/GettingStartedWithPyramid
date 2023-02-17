@@ -1,4 +1,5 @@
 import bson
+import pymongo
 from pymongo import MongoClient
 from pprint import pprint
 
@@ -21,16 +22,6 @@ def add_user_to_db(users):
     return result
 
 
-users = [
-    {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
-    {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
-    {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
-]
-
-# user_added = add_user_to_db(users)
-# print(user_added)
-
-
 def get_user_from_db(mobile_no):
     user = collection_name.find_one({'mobile_no': mobile_no})
     if user:
@@ -39,17 +30,11 @@ def get_user_from_db(mobile_no):
         print('user not found')
 
 
-# print(get_user_from_db('1234567890'))
-
-
 def get_users_from_db():
     users = []
     for doc in collection_name.find():
         users.append(doc)
     return users
-
-
-# print(get_users_from_db())
 
 
 def update_user_in_db(mobile_no, updated_details):
@@ -61,9 +46,6 @@ def update_user_in_db(mobile_no, updated_details):
         return False
 
 
-# print(update_user_in_db("1234123467", {'city': 'Bangalore'}))
-
-
 def delete_users_from_db(mobile_no):
     deleted = collection_name.delete_one({'mobile_no': mobile_no})
     if deleted.deleted_count == 1:
@@ -71,17 +53,45 @@ def delete_users_from_db(mobile_no):
     else:
         return False
 
-# delete_user = delete_users_from_db('9898989898')
-# print(delete_user)
 
+try:
+    # to add users
+    users = [
+        {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
+        {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
+        {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
+    ]
+
+    user_added = add_user_to_db(users)
+    print(user_added)
+
+    # to get user
+    print(get_user_from_db('1234567890'))
+
+    # To get users
+    print(get_users_from_db())
+
+    # To update the users
+    print(update_user_in_db("1234123467", {'city': 'Bangalore'}))
+
+    # To delete the user
+    delete_user = delete_users_from_db('9898989898')
+    print(delete_user)
+
+except pymongo.errors.ConnectionFailure:
+    print("Connection Error!")
+except pymongo.errors.OperationFailure as e:
+    print(f"MongoDB operation failed with error: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
 
 # -------------TO-DO ---------------
 
 # 1. Add try/catch for internal server error or connection error
-# 2. Return every function with values or True/False
-# 3. Do not add users with the same mobile no (Giving messages if in the list of users added which one was added
+# ✅ 2. Return every function with values or True/False
+# ✅ 3. Do not add users with the same mobile no (Giving messages if in the list of users added which one was added
 # which one was not) using key/value
-# 4. To update the user in a way that the mobile no should be same but the other details should
+# ✅ 4. To update the user in a way that the mobile no should be same but the other details should
 # change as mentioned
 # ✅ 5. check if number exists for deleting the user otherwise dont make the func (delete) call
 
