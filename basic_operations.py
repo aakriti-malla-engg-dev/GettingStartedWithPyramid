@@ -34,6 +34,7 @@ def get_users_from_db():
     users = []
     for doc in collection_name.find():
         users.append(doc)
+
     return users
 
 
@@ -56,11 +57,11 @@ def delete_users_from_db(mobile_no):
 
 try:
     # to add users
-    # users = [
-    #     {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
-    #     {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
-    #     {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
-    # ]
+    users = [
+        {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
+        {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
+        {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
+    ]
 
     # user_added = add_user_to_db(users)
     # print(user_added)
@@ -69,7 +70,7 @@ try:
     # print(get_user_from_db('1234567890'))
 
     # To get users
-    print(get_users_from_db())
+    # print(get_users_from_db())
 
     # To update the users
     # print(update_user_in_db("1234123467", {'city': 'Bangalore'}))
@@ -87,7 +88,7 @@ except Exception as e:
 
 # -------------TO-DO ---------------
 
-# 1. Add try/catch for internal server error or connection error
+# ✅ 1. Add try/catch for internal server error or connection error
 # ✅ 2. Return every function with values or True/False
 # ✅ 3. Do not add users with the same mobile no (Giving messages if in the list of users added which one was added
 # which one was not) using key/value
