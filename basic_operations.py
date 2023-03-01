@@ -13,17 +13,17 @@ def add_user_to_db(users):
     inserted = []
     existing = []
     for user in users:
-        if collection_name.find_one({"mobile_no": user['mobile_no']}):
-            existing.append(user['mobile_no'])
+        if collection_name.find_one({"id": user['id']}):
+            existing.append(str(user['id']))
         else:
             collection_name.insert_one(user)
-            inserted.append(user['mobile_no'])
+            inserted.append(str(user['id']))
     result = f"Inserted users: {', '.join(inserted)}\nExisting users: {', '.join(existing)}"
     return result
 
 
-def get_user_from_db(mobile_no):
-    user = collection_name.find_one({'mobile_no': mobile_no})
+def get_user_from_db(id):
+    user = collection_name.find_one({'id': id})
     if user:
         return user
     else:
@@ -34,34 +34,33 @@ def get_users_from_db():
     users = []
     for doc in collection_name.find():
         users.append(doc)
-
     return users
 
 
-def update_user_in_db(mobile_no, updated_details):
-    user = collection_name.find_one({'mobile_no': mobile_no})
+def update_user_in_db(id, updated_details):
+    user = collection_name.find_one({'id': id})
     if user:
-        collection_name.update_one({"mobile_no": mobile_no}, {"$set": updated_details})
+        collection_name.update_one({"id": id}, {"$set": updated_details})
         return True
     else:
         return False
 
 
-def delete_users_from_db(mobile_no):
-    deleted = collection_name.delete_one({'mobile_no': mobile_no})
+def delete_users_from_db(id):
+    deleted = collection_name.delete_one({'id': id})
     if deleted.deleted_count == 1:
-        return True
+        return 'User Deleted!'
     else:
-        return False
+        return 'User not Found!'
 
 
-try:
-    # to add users
-    users = [
-        {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
-        {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
-        {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
-    ]
+# try:
+#     # to add users
+#     users = [
+#         {'name': "abc", "mobile_no": "6767676767", "city": "Delhi"},
+#         {'name': "def", "mobile_no": "1234123467", "city": "Delhi"},
+#         {'name': "ghi", "mobile_no": "9898989898", "city": "Delhi"}
+#     ]
 
     # user_added = add_user_to_db(users)
     # print(user_added)
@@ -78,13 +77,13 @@ try:
     # To delete the user
     # delete_user = delete_users_from_db('9898989898')
     # print(delete_user)
-
-except pymongo.errors.ConnectionFailure:
-    print("Connection Error!")
-except pymongo.errors.OperationFailure as e:
-    print(f"MongoDB operation failed with error: {e}")
-except Exception as e:
-    print(f"An error occurred: {e}")
+#
+# except pymongo.errors.ConnectionFailure:
+#     print("Connection Error!")
+# except pymongo.errors.OperationFailure as e:
+#     print(f"MongoDB operation failed with error: {e}")
+# except Exception as e:
+#     print(f"An error occurred: {e}")
 
 # -------------TO-DO ---------------
 
